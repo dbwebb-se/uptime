@@ -70,4 +70,6 @@ tr:hover {
 <?= $html ?>
 </table>
 
-<p><a href=add>Skicka in bidrag</a>
+<p><a href=add>Skicka in bidrag</a></p>
+
+<p>Tävlingen pågår mellan <?= TOURNAMENT_START ?> - <?= TOURNAMENT_END ?></p>

@@ -16,7 +16,7 @@ if (empty($_GET)) {
         Vem: <input type=text name=who> (unik identifierare på dig och din server)
     </p>
     <p>
-        Uptime: <input type=text name=uptime> (antal dagar)
+        Uptime: <input type=text name=uptime> (antal dagar taget direkt från kommandot uptimes utskrift)
     </p>
     <p>
         <input type=submit value="Skicka in">

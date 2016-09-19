@@ -62,6 +62,8 @@ tr:hover {
 
 <p>Tävlingen pågår mellan <?= TOURNAMENT_START ?> - <?= TOURNAMENT_END ?></p>
 
+<p>Max uptime är för tillfället: <?= maxUptime() ?> dagar.</p>
+
 <table>
     <tr>
         <th>Plats</th>

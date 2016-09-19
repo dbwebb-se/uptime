@@ -127,3 +127,17 @@ function updateUptime($pdo, $whoId, $uptime)
     $params =  [$uptime, $top, $whoId];
     return $stm->execute($params);
 }
+
+
+
+/**
+ * Calculate max uptime.
+ */
+function maxUptime()
+{
+    // Check if uptime is larger than expected, check with tournament start
+    $start = new DateTime(TOURNAMENT_START);
+    $today = new DateTime();
+    $max = $today->diff($start)->format("%a");
+    return $max;
+}

@@ -68,9 +68,7 @@ EOD;
 // Is it a reasonable uptime coming in?
 
 // Check if uptime is larger than expected, check with tournament start
-$start = new DateTime(TOURNAMENT_START);
-$today = new DateTime();
-$max = $today->diff($start)->format("%a");
+$max = maxUptime();
 if ($uptime == $max) {
     echo "<p>Right on, seems like your uptime is max!";
 } elseif ($uptime > $max) {

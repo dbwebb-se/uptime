@@ -59,6 +59,9 @@ tr:hover {
 </style>
 
 <h1>Uptime topplista</h1>
+
+<p>Tävlingen pågår mellan <?= TOURNAMENT_START ?> - <?= TOURNAMENT_END ?></p>
+
 <table>
     <tr>
         <th>Plats</th>
@@ -71,7 +74,5 @@ tr:hover {
 </table>
 
 <p><a href=add>Skicka in bidrag</a></p>
-
-<p>Tävlingen pågår mellan <?= TOURNAMENT_START ?> - <?= TOURNAMENT_END ?></p>
 
 <p><a href=https://github.com/mosbth/uptime>GitHub</a></p>

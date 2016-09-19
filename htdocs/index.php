@@ -69,3 +69,5 @@ tr:hover {
     </tr>
 <?= $html ?>
 </table>
+
+<p><a href=add>Skicka in bidrag</a>

@@ -3,6 +3,30 @@
 include __DIR__ . "/../config.php";
 include $functionsInclude;
 
+// Get incoming
+if (empty($_GET)) {
+?>
+<!doctype html>
+<html lang=sv>
+<meta charset=utf-8>
+<title>Lägg till entry i uptime tävling</title>
+<h1>Rapportera till uptime tävlingen</h1>
+    <form>
+    <p>
+        Vem: <input type=text name=who> (unik identifierare på dig och din server)
+    </p>
+    <p>
+        Uptime: <input type=text name=uptime> (antal dagar)
+    </p>
+    <p>
+        <input type=submit value="Skicka in">
+    </p>
+</form>
+
+<?php
+    die();
+}
+
 
 
 // Get incoming
@@ -67,3 +91,5 @@ date:      $last->date
 uptime:    $last->uptime 
 </pre>
 EOD;
+
+echo "<p><a href=..>Visa topplista</a>";

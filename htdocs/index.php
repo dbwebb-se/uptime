@@ -76,3 +76,5 @@ tr:hover {
 <p><a href=add>Skicka in bidrag</a></p>
 
 <p><a href=https://github.com/mosbth/uptime>GitHub</a></p>
+
+<p>Mer info i <a href="https://dbwebb.se/forum/viewtopic.php?f=23&t=5595">forumet</a> och på <a href="https://grillcon.dbwebb.se/blogg/vem-vinner-uptime-ligan">GrillCons blogg</a>.</p>

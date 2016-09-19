@@ -80,7 +80,7 @@ local-publish:
 	rsync -av $(EXCLUDE_ON_PUBLISH) --exclude data/uptime.sqlite data htdocs $(LOCAL_HTDOCS)
 
 	chmod 777 $(LOCAL_HTDOCS)/data
-	chmod 666 $(LOCAL_HTDOCS)/data/uptime.sqlite
+	[ ! -d $(LOCAL_HTDOCS)/data/uptime.sqlite ] ||  chmod 666 $(LOCAL_HTDOCS)/data/uptime.sqlite
 
 
 

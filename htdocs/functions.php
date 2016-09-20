@@ -46,7 +46,7 @@ function addUser($pdo, $who)
 /**
  * Add log entry.
  */
-function addLogEntry($pdo, $who, $uptime)
+function addLogEntry($pdo, $who, $uptime, $uptimeTot)
 {
     // Check if logentry for current date exists
     $sql = "SELECT who FROM log where who = ? AND date = date('now')";
@@ -59,12 +59,12 @@ function addLogEntry($pdo, $who, $uptime)
         // Insert
         $sql = <<<EOD
 INSERT INTO log 
-        (who, date, timestamp, uptime)
+        (who, date, timestamp, uptime, uptimeTot)
     VALUES
-        (?, date('now'), datetime('now', 'localtime'), ?)
+        (?, date('now'), datetime('now', 'localtime'), ?, ?)
 EOD;
         $stm = $pdo->prepare($sql);
-        $params =  [$who, $uptime];
+        $params =  [$who, $uptime, $uptimeTot];
         return $stm->execute($params);
     }
 
@@ -73,13 +73,14 @@ EOD;
 UPDATE log
     SET 
         timestamp = datetime('now', 'localtime'),
-        uptime = ?
+        uptime = ?,
+        uptimeTot = ?
     WHERE
         who = ? AND date = date('now')
 EOD;
 
     $stm = $pdo->prepare($sql);
-    $params =  [$uptime, $who];
+    $params =  [$uptime, $uptimeTot, $who];
     return $stm->execute($params);
 }
 
@@ -103,7 +104,7 @@ function lastLogEntry($pdo, $who)
 /**
  * Update uptime.
  */
-function updateUptime($pdo, $whoId, $uptime)
+function updateUptime($pdo, $whoId, $uptime, $uptimeTot)
 {
     $sql = "SELECT latest, top FROM uptime WHERE who = ?";
     $stm = $pdo->prepare($sql);
@@ -113,18 +114,18 @@ function updateUptime($pdo, $whoId, $uptime)
 
     if ($res === false) {
         // Insert uptime
-        $sql = "INSERT INTO uptime (who, latest, top, updated) VALUES (?, ?, ?, date('now'))";
+        $sql = "INSERT INTO uptime (who, latest, top, current, updated) VALUES (?, ?, ?, ?, datetime('now', 'localtime'))";
         $stm = $pdo->prepare($sql);
-        $params =  [$whoId, $uptime, $uptime];
+        $params =  [$whoId, $uptime, $uptimeTot];
         return $stm->execute($params);
     }
 
     // Update uptime
     $top = $res->top;
     $top = $uptime > $top ? $uptime : $top;
-    $sql = "UPDATE uptime set latest = ?, top = ?, updated = date('now') WHERE who = ?";
+    $sql = "UPDATE uptime set latest = ?, top = ?, current = ?, updated = datetime('now', 'localtime') WHERE who = ?";
     $stm = $pdo->prepare($sql);
-    $params =  [$uptime, $top, $whoId];
+    $params =  [$uptime, $top, $uptimeTot, $whoId];
     return $stm->execute($params);
 }
 

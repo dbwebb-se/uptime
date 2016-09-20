@@ -36,6 +36,7 @@ foreach ($res as $val) {
         <td>$name</td>
         <td class="right">${val["top"]}</td>
         <td class="right">${val["latest"]}</td>
+        <td class="right">${val["current"]}</td>
         <td class="center">${val["updated"]}</td>
     </tr>
 EOD;
@@ -69,8 +70,9 @@ tr:hover {
     <tr>
         <th>Plats</th>
         <th>Vem</th>
-        <th>Uptime topp</th>
-        <th>Senaste uptime</th>
+        <th><span title="Högsta noterade uptime under tävlingsperioden - denna är det vi tävlar med">Uptime<br>topp</span></th>
+        <th><span title="Senast rapporterad uptime (nuvarande uptime), kan vara mindre än toppnoteringen om servern startat om...">Senaste<br>uptime</span></th>
+        <th><span title="Rapporterad verklig uptime (utom tävlan - men ändå - lets showoff)">Verklig<br>uptime</span></th>
         <th>Rapporterat</th>
     </tr>
 <?= $html ?>

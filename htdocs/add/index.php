@@ -69,6 +69,7 @@ EOD;
 
 // Check if uptime is larger than expected, check with tournament start
 $max = maxUptime();
+$uptimeTot = $uptime;
 if ($uptime == $max) {
     echo "<p>Right on, seems like your uptime is max!";
 } elseif ($uptime > $max) {
@@ -77,8 +78,8 @@ if ($uptime == $max) {
 }
 
 // Add new log entry
-$added = addLogEntry($pdo, $who, $uptime);
-$update = updateUptime($pdo, $user->id, $uptime);
+$added = addLogEntry($pdo, $who, $uptime, $uptimeTot);
+$update = updateUptime($pdo, $user->id, $uptime, $uptimeTot);
 
 $last = lastLogEntry($pdo, $who);
 echo <<<EOD
@@ -87,6 +88,7 @@ echo <<<EOD
 timestamp: $last->timestamp
 date:      $last->date
 uptime:    $last->uptime 
+uptimeTot: $last->uptimeTot 
 </pre>
 EOD;
 

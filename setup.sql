@@ -17,7 +17,8 @@ CREATE TABLE log (
     "who" INTEGER,
     "date" TEXT,
     "timestamp" INTEGER,
-    "uptime" TEXT,
+    "uptime" INTEGER, -- TEXT in original database
+    "uptimeTot" INTEGER,
     PRIMARY KEY("who", "date"),
     FOREIGN KEY("who") REFERENCES participant(id)
 );
@@ -32,6 +33,14 @@ CREATE TABLE uptime (
     "who" INTEGER PRIMARY KEY,
     "latest" INTEGER,
     "top" INTEGER,
+    "current" INTEGER,
     "updated" TEXT,
     FOREIGN KEY("who") REFERENCES participant(id)
 );
+
+
+--
+-- To upgrade
+--
+alter table log add column uptimeTot INTEGER; 
+alter table uptime add column current INTEGER; 

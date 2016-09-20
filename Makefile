@@ -150,10 +150,8 @@ backup:
 	@echo $(call HELPTEXT,$@)
 	install --directory backup/$(TODAY)
 	
-	# Forum
-	mysqldump -uroot dbw_forum | gzip > backup/$(TODAY)/dbw_forum.gz
-	install --directory backup/$(TODAY)/forum/files/
-	rsync -a $(LOCAL_HTDOCS)/htdocs/forum/files/ backup/$(TODAY)/forum/files/
+	# Get database from server
+	rsync -av -e "ssh -p 2222" $(WWW_SITE):htdocs/$(WWW_SITE)/data backup/$(TODAY)
 
 	# Point to latest successful backup
 	rm -f backup/latest

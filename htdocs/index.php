@@ -29,10 +29,11 @@ foreach ($res as $val) {
     }
     $last = $val["top"];
 
+    $name = htmlentities($val["whoName"]);
     $html .= <<<EOD
     <tr>
         <td>$place</td>
-        <td>${val["whoName"]}</td>
+        <td>$name</td>
         <td class="right">${val["top"]}</td>
         <td class="right">${val["latest"]}</td>
         <td class="center">${val["updated"]}</td>

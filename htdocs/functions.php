@@ -90,7 +90,7 @@ EOD;
  */
 function lastLogEntry($pdo, $who)
 {
-    $sql = "SELECT * FROM log WHERE who = ? ORDER BY date LIMIT 1";
+    $sql = "SELECT * FROM log WHERE who = ? ORDER BY date DESC LIMIT 1";
     $stm = $pdo->prepare($sql);
     $params =  [$who];
     $stm->execute($params);

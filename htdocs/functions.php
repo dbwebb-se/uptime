@@ -116,7 +116,7 @@ function updateUptime($pdo, $whoId, $uptime, $uptimeTot)
         // Insert uptime
         $sql = "INSERT INTO uptime (who, latest, top, current, updated) VALUES (?, ?, ?, ?, datetime('now', 'localtime'))";
         $stm = $pdo->prepare($sql);
-        $params =  [$whoId, $uptime, $uptimeTot];
+        $params =  [$whoId, $uptime, $uptime, $uptimeTot];
         return $stm->execute($params);
     }
 

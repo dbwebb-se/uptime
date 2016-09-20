@@ -107,7 +107,7 @@ function updateUptime($pdo, $whoId, $uptime)
 {
     $sql = "SELECT latest, top FROM uptime WHERE who = ?";
     $stm = $pdo->prepare($sql);
-    $params =  [$whoId, $uptime];
+    $params =  [$whoId];
     $stm->execute($params);
     $res = $stm->fetchObject();
 

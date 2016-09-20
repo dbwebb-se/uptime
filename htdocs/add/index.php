@@ -41,6 +41,10 @@ $who    = isset($_GET["who"])      ? $_GET["who"]      : null;
 is_string($who)
     or die("Who must be a string");
 
+$uptimeInt = (int) $uptime;
+$uptimeInt == $uptime
+    or die("Uptime must be positive integer");
+
 
 
 // Add log entry to database

@@ -8,7 +8,7 @@ include $functionsInclude;
 // Get toplist
 $pdo = openDatabase(DSN);
 
-$sql = "SELECT u.*, p.who AS whoName FROM uptime AS u INNER JOIN participant AS p ON u.who = p.id ORDER BY top";
+$sql = "SELECT u.*, p.who AS whoName FROM uptime AS u INNER JOIN participant AS p ON u.who = p.id ORDER BY top DESC";
 $stm = $pdo->prepare($sql);
 $stm->execute();
 $res = $stm->fetchAll();

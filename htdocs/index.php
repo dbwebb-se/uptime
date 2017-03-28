@@ -28,10 +28,19 @@ foreach ($res as $val) {
         $place = $numContenders;
     }
     $last = $val["top"];
+    
+    // Has it been updated today?
+    $today = date("Y-m-d");
+    $updated = date("Y-m-d", strtotime($val["updated"]));
+    if ($today == $updated) {
+        $classOld = "";
+    } else {
+        $classOld = ' class="old"';
+    }
 
     $name = htmlentities($val["whoName"]);
     $html .= <<<EOD
-    <tr>
+    <tr${classOld}>
         <td>$place</td>
         <td>$name</td>
         <td class="right">${val["top"]}</td>
@@ -57,6 +66,9 @@ td {
 }
 tr:hover {
     background-color: #eee;
+}
+tr.old {
+    color: #ccc;
 }
 </style>
 

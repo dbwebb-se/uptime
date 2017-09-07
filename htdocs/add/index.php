@@ -23,6 +23,10 @@ if (empty($_GET)) {
     </p>
 </form>
 
+<p>
+    Du kan och bör <a href="https://dbwebb.se/forum/viewtopic.php?f=23&t=5595#p46651">rapportera in din uptime automatiskt via crontab</a>.
+</p>
+
 <?php
     die();
 }

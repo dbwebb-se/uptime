@@ -139,6 +139,9 @@ function maxUptime()
     // Check if uptime is larger than expected, check with tournament start
     $start = new DateTime(TOURNAMENT_START);
     $today = new DateTime();
+    if ($today < $start) {
+        return 0;
+    }
     $max = $today->diff($start)->format("%a");
     return $max;
 }

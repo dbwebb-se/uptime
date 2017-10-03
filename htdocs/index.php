@@ -54,6 +54,7 @@ EOD;
 <!doctype html>
 <html lang="sv">
 <meta charset="utf-8">
+<title>Uptime Topplista</title>
 <style>
 td.right {
     text-align: right;

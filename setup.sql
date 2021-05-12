@@ -42,5 +42,5 @@ CREATE TABLE uptime (
 --
 -- To upgrade
 --
-alter table log add column uptimeTot INTEGER; 
-alter table uptime add column current INTEGER; 
+-- alter table log add column uptimeTot INTEGER;
+-- alter table uptime add column current INTEGER; 

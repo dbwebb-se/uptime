@@ -10,7 +10,7 @@ TARGET_COLOR	= \033[32;01m
 OK_COLOR		= \033[32;01m
 ERROR_COLOR		= \033[31;01m
 WARN_COLOR		= \033[33;01m
-ACTION			= $(TARGET_COLOR)--> 
+ACTION			= $(TARGET_COLOR)-->
 HELPTEXT 		= "$(ACTION)" `egrep "^\# target: $(1) " Makefile | sed "s/\# target: $(1)[ ]\+- / /g"` "$(NO_COLOR)"
 
 WWW_SITE	:= uptime.dbwebb.se
@@ -129,7 +129,7 @@ forum-init:
 # target: submodule-update    - Update all submodules.
 .PHONY: submodule-init submodule-update
 submodule-init:
-	git submodule update --init --recursive 
+	git submodule update --init --recursive
 
 submodule-update:
 	git pull --recurse-submodules && git submodule foreach git pull origin master
@@ -140,7 +140,7 @@ submodule-update:
 .PHONY: server-node-echo
 server-node-echo:
 	@echo $(call HELPTEXT,$@)
-	cd $(LOCAL_HTDOCS)/htdocs/repo/javascript/example/lekplats/broadcast-server-with-node-js-and-html5-websockets && nodejs websocket_broadcastserver.js 
+	cd $(LOCAL_HTDOCS)/htdocs/repo/javascript/example/lekplats/broadcast-server-with-node-js-and-html5-websockets && nodejs websocket_broadcastserver.js
 
 
 
@@ -149,7 +149,7 @@ server-node-echo:
 backup:
 	@echo $(call HELPTEXT,$@)
 	install --directory backup/$(TODAY)
-	
+
 	# Get database from server
 	rsync -av -e "ssh -p 2222" $(WWW_SITE):htdocs/$(WWW_SITE)/data backup/$(TODAY)
 
@@ -163,10 +163,10 @@ backup:
 .PHONY: load-backup
 load-backup:
 	@echo $(call HELPTEXT,$@)
-	
+
 	# Forum
 	zcat backup/latest/dbw_forum.gz | mysql -uroot dbw_forum
-	rsync -a --delete backup/latest/forum/files/ htdocs/forum/files/ 
+	rsync -a --delete backup/latest/forum/files/ htdocs/forum/files/
 
 
 
@@ -174,15 +174,15 @@ load-backup:
 .PHONY: database-create
 database-create:
 	@echo $(call HELPTEXT,$@)
-	
+
 	# Forum
 	#create database dbw_forum;
 	#grant all on dbw_forum.* to 'dbwebb'@'localhost' identified by 'password';
 
-	#create database Anaxoophp; 
-	#grant all on Anaxoophp.* to acronym@localhost identified by 'password';  
+	#create database Anaxoophp;
+	#grant all on Anaxoophp.* to acronym@localhost identified by 'password';
 
-	#create database Movie; 
+	#create database Movie;
 	#grant all on Movie.* to 'acronym'@'localhost' identified by 'password';
 
 
@@ -191,7 +191,7 @@ database-create:
 .PHONY: forum-no-activation
 forum-no-activation:
 	@echo $(call HELPTEXT,$@)
-	
+
 	echo "UPDATE phpbb_config SET config_value = 3 WHERE config_name = 'require_activation';" | mysql -uroot dbw_forum
 
 
@@ -200,7 +200,7 @@ forum-no-activation:
 #
 .PHONY: prepare-build
 
-prepare-build: 
+prepare-build:
 	rm -rf build
 	install -d build/css build/lint
 
@@ -294,10 +294,11 @@ install-fresh: etc-hosts virtual-host update
 define VIRTUAL_HOST_80
 Define site $(WWW_SITE)
 ServerAdmin $(SERVER_ADMIN)
+ServerName $${site}
 
 <VirtualHost *:80>
-	ServerName $${site}
 	ServerAlias local.$${site}
+	ServerAlias do4.$${site}
 	DocumentRoot $(HTDOCS_BASE)/$${site}/htdocs
 
 	<Directory />
@@ -322,9 +323,9 @@ export VIRTUAL_HOST_80
 define VIRTUAL_HOST_80_WWW
 Define site $(WWW_SITE)
 ServerAdmin $(SERVER_ADMIN)
+ServerName www.$${site}
 
 <VirtualHost *:80>
-	ServerName www.$${site}
 	Redirect "/" "http://$${site}/"
 </VirtualHost>
 endef
@@ -347,9 +348,9 @@ virtual-host:
 define VIRTUAL_HOST_443
 Define site $(WWW_SITE)
 ServerAdmin $(SERVER_ADMIN)
+ServerName $${site}
 
 <VirtualHost *:80>
-	ServerName $${site}
 	Redirect "/" "https://$${site}/"
 </VirtualHost>
 
@@ -384,9 +385,9 @@ export VIRTUAL_HOST_443
 define VIRTUAL_HOST_443_WWW
 Define site $(WWW_SITE)
 ServerAdmin $(SERVER_ADMIN)
+ServerName www.$${site}
 
 <VirtualHost *:80>
-	ServerName www.$${site}
 	Redirect "/" "https://www.$${site}/"
 </VirtualHost>
 
